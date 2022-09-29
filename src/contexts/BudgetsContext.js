@@ -34,18 +34,24 @@ export const BudgetsProvider = ({ children }) => {
     }
 
     function deleteBudget({ id }) {
+        setExpenses(prevExpenses => {
+            return prevExpenses.map(expense => {
+                if (expense.budgetId !== id) return expense 
+                return { ...expense, budgetId: UNCATEGORIZED_BUDGET_ID }
+            })
+        })
+
         setBudgets(prevBudgets => {
             return prevBudgets.filter(budget => budget.id !== id)
         })
     } 
 
     function deleteExpense({ id }) {
-        // TO DO: sort out expenses
         setExpenses(prevExpenses => {
             return prevExpenses.filter(expense => expense.id !== id)
         })
     } 
-
+    
     return (
         <BudgetsContext.Provider value={{
             budgets, 
@@ -58,5 +64,3 @@ export const BudgetsProvider = ({ children }) => {
         }}>{children}</BudgetsContext.Provider>
     )
 }
-
-export default BudgetsContext;

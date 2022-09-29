@@ -8,7 +8,7 @@ export default function useLocalStorage(key, defaultValue) {
         if (typeof defaultValue === "function") {
             return defaultValue()
         } else {
-            return defaultValue()
+            return defaultValue
         }
     }) 
 
